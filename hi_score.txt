@@ -1,1 +1,1 @@
-hiscore=103.44
+hiscore=67.00

@@ -10,9 +10,12 @@ sum_time = 0
 score    = 0
 colors   = ['red','pink','orange','yellow','blue','green']
 
-file = open("hi_score.txt","r")
-hisc = file.read()
+hi_score_path = "/home/takpinar/desktop/Doomsday/hi_score.txt"
+file = open(hi_score_path,"r")
+hisc = float(file.read()[8:-1])
 file.close()
+himins = round(hisc//60,1)
+hisecs = round(hisc%60,1)
 
 begin = time.time()
 
@@ -32,24 +35,23 @@ while i<num_qs:
     if ans.lower()==weekday_str.lower():
         score += 1
         print(colored('\N{check mark}','green'))
-        # time.sleep(1)
+        time.sleep(.1)
     else:
         print(colored('X','red'))
-        # time.sleep(1)     
+        time.sleep(.1)     
     
 perc = round(score/num_qs,2)*100
-tot_time = time.time() - begin
-
 best = False
-if (perc == 1.0 and float(hisc[8:-1]) > tot_time) or hisc == '':
+
+if (perc == 1.0 and hisc > sum_time) or hisc == '':
     print('BEST')
     file = open("hi_score.txt","w")
-    file.write("hiscore=" + str(round(tot_time,2)))
+    file.write("hiscore=" + str(round(sum_time,2)))
     file.close()
     best = True
 
-mins = round(tot_time//60,0)
-secs = round(tot_time%60,0)
+mins = round(sum_time//60,0)
+secs = round(sum_time%60,0)
 avg_time = round(sum_time/num_qs,2)
 
 print('---------------------------------------')
@@ -59,4 +61,6 @@ if best:
 else:
     print("Total Time:   {} min. {} sec.".format(mins, secs))
 print("Average Time: {} sec.".format(avg_time))
+print('---------------------------------------')
+print("High Score:   {} min. {} sec.".format(himins, hisecs))
 print('---------------------------------------')
