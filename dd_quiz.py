@@ -30,10 +30,7 @@ while i<num_qs:
         # time.sleep(1)
     else:
         print(colored('X','red'))
-        # time.sleep(1)
-        
-    print(round(dur,2))
-    
+        # time.sleep(1)    
     
 tot_time = time.time() - begin
 mins = round(tot_time//60,0)
